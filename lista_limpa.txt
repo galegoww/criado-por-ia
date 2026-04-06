@@ -1,0 +1,7 @@
+0.0.0.0 cat.us5.us.criteo.com
+0.0.0.0 click.hooligs.app
+0.0.0.0 educacaoemfinancas.com
+0.0.0.0 ettvr4.cockingynon.com
+0.0.0.0 jup.ag
+0.0.0.0 singleflirt.com
+0.0.0.0 tudoesportes.online
