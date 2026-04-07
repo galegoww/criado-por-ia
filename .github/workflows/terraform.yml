@@ -1,8 +1,11 @@
-name: Limpeza Automatica Pihole
+name: Limpeza Automática Pihole
+
 on:
   push:
     paths:
       - 'lista_pihole.txt'
+  workflow_dispatch: # Permite rodar manualmente para testar
+
 jobs:
   limpar:
     runs-on: ubuntu-latest
@@ -10,14 +13,20 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      
+      - name: Configurar Python
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-      - run: python limpar_lista.py
+          python-version: '3.11' # Versão mais estável
+
+      - name: Executar script de limpeza
+        run: python limpar_lista.py
+
       - name: Salvar lista limpa
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add lista_limpa.txt
-          git commit -m "Auto: Lista limpa atualizada" || exit 0
+          # O "|| exit 0" evita que o erro aconteça se não houver mudanças na lista
+          git commit -m "Auto: Lista limpa atualizada" || echo "Sem mudanças para commitar"
           git push
